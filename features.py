@@ -1,4 +1,6 @@
 state = "stopped"
+gear = 1
+max_acceleration = 30
 
 def start():
   global state
@@ -9,13 +11,30 @@ def start():
     state = "started"
 
 def accelerate():
-  print("work in progress")
+  global state
+  if state == "stopped":
+    print("Start the car first\n")
+  else:
+    acc_value = int(input("Enter speed in meter per second: "))
+    if acc_value > max_acceleration:
+      print("Increase gear to reach that speed\n")
+    else:
+      print(f"Accelerating at {acc_value} m/s\n")
+    
 
 def gear():
-  print("work in progress")
-
-def pause():
-  print("work in progress")
+  global max_acceleration
+  gear_level = int(input("Enter gear level: "))
+  gears = {
+    1 : 30,
+    2 : 60,
+    3 : 90,
+    4 : 120,
+    5 : 150,
+    6 : 180
+    }
+  max_acceleration = gears[gear_level] if gear_level in gears else print("\nInvalid")
+  print (f"{max_acceleration} is now your maximum acceleration\n")
 
 def fire():
   print("work in progress")

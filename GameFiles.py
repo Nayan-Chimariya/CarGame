@@ -1,5 +1,7 @@
 import os
 from random import randint
+import progressbar
+from time import sleep
 
 def help():
   print("These are my commands:\n"
@@ -9,8 +11,10 @@ def help():
             "3. exit - to exit the program\n")
 
 def goal():
-  goal = (randint(1000,10000))
-  print("Your goal is to reach{goal} within {time_limit} seconds}")
+  global time_limit
+  distance = (randint(100,1000))
+  time_limit = 10
+  print(f"Your goal is to reach {distance} km within {time_limit} seconds\n")
 
 def loadingScreen():
   os.system("cls")
@@ -35,3 +39,16 @@ def loadingScreen():
             `""""'                                         `""""'
   ''')
   print(car_art)
+
+def ProcessBar():  
+  bar = progressbar.ProgressBar(maxval=20, \
+    widgets=[progressbar.Bar('=', '[', ']'), ' ', progressbar.Percentage()])
+  bar.start()
+  for i in range(20):
+    bar.update(i+1)
+    sleep(0.25)
+  bar.finish()
+
+def EndScreen():
+   print("Time Limit Reached")
+   ''' handle: win/loss? .. high score .. re run? '''
