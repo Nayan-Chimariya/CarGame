@@ -5,6 +5,8 @@ import threading
 from time import sleep
 
 game_running = False
+accident = False
+acc_value = 5
 state = "stopped"
 
 time_limit = 10
@@ -19,6 +21,7 @@ def TimeLimit():
       
 def main():
   global game_running
+  global accident
   is_start = input("Press [Enter] to start ").upper()
   if is_start == "":
     game_running = True
@@ -29,7 +32,7 @@ def main():
   os.system("cls")
 
   GameFiles.goal()
-  while game_running == True:
+  while game_running == True and accident == False:
     command = input("> ")
 
     commands = {
@@ -47,5 +50,8 @@ def main():
   if(game_running == False):
     GameFiles.EndScreen()
 
-threading.Thread(target = TimeLimit).start()
+speed_time_limit = 10
+
+
+#threading.Thread(target = TimeLimit).start()
 threading.Thread(target = main).start()
